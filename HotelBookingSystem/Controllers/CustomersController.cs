@@ -31,26 +31,42 @@ namespace HotelBookingSystem.Controllers
             }
             catch (Exception ex)
             {
-
+                return NotFound(ex);
             }
             
          }
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            return await _context.PostCustomer(customer);
+            try
+            {
+                return await _context.PostCustomer(customer);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
         }
 
         [HttpPut,Route("Update Your Password By using ID")] 
         public async Task<ActionResult<Customer?>> PutCustomer(int id, Customer customer)
         {
-            return await _context.PutCustomer(id,customer);
+            try
+            {
+                return await _context.PutCustomer(id, customer);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
         }
 
         [HttpDelete("Delete By Id")]
         public async Task<String> DeleteCustomer(int id)
         {
-            return await _context.DeleteCustomer(id);
+          
+                return await _context.DeleteCustomer(id);
+       
         }
     }
 }

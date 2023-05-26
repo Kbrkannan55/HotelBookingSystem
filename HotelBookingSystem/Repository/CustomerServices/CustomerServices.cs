@@ -14,17 +14,22 @@ namespace HotelBookingSystem.Repository.CustomerServices
 
         public async Task<Customer> GetCustomers(int id)
         {
-            
-            var cus = await _context.Customers.FirstOrDefaultAsync(x => x.CusID == id);
-            if(id<0)
+            if (id < 0)
             {
                 throw new ArithmeticException("Enter Valid Number");
             }
+
+            var cus = await _context.Customers.FirstOrDefaultAsync(x => x.CusID == id);
+          
             return cus;
         }
 
         public async Task<Customer> PostCustomer(Customer customer)
         {
+            if (customer == null)
+            {
+                throw new Exception("Not Valid");
+            }
             _context.Customers.Add(customer);
             _context.SaveChanges();
             return customer;
@@ -33,6 +38,10 @@ namespace HotelBookingSystem.Repository.CustomerServices
 
         public async Task<Customer?> PutCustomer(int id, Customer customer)
         {
+            if (id < 0)
+            {
+                throw new Exception("Not Valid");
+            }
             var cus=await _context.Customers.FirstOrDefaultAsync(x=>x.CusID==id);
             cus.CustomerPassword = customer.CustomerPassword;
             _context.SaveChanges();
@@ -41,6 +50,10 @@ namespace HotelBookingSystem.Repository.CustomerServices
 
         public async Task<String> DeleteCustomer(int id)
         {
+            if (id < 0)
+            {
+                throw new Exception("Not Valid");
+            }
             var Cus = await _context.Customers.FirstOrDefaultAsync(x => x.CusID == id);
             _context.Remove(Cus);
             _context.SaveChanges();

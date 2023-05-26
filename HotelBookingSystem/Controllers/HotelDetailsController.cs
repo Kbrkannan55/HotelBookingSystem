@@ -28,25 +28,51 @@ namespace HotelBookingSystem.Controllers
         [HttpGet("All Hotels Available")]
         public async Task<ActionResult<List<HotelDetails>>> GetHotelDetails()
         {
-            return await _context.GetHotelDetails();
+            try
+            {
+
+
+                return await _context.GetHotelDetails();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost("Add New Hotels")]
         public async Task<ActionResult<List<HotelDetails>>> PostHotelDetails(HotelDetails hotelDetails)
         {
-            return await _context.PostHotelDetails(hotelDetails);
+            try
+            {
+
+
+                return await _context.PostHotelDetails(hotelDetails);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpDelete("Delete Specific Hotel By its ID")]
         public async Task<string> DeleteDetails(int id)
         {
-            return await _context.DeleteDetails(id);
+                return await _context.DeleteDetails(id);
+          
         }
 
         [HttpGet]
         public async Task<ActionResult<RoomDetails>> GetHotelDetails(int id)
         {
-            return await _context.GetHotelDetails(id);
+            try
+            {
+                return await _context.GetHotelDetails(id);
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }
