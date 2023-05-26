@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HotelBookingSystem.Models;
 using HotelBookingSystem.Repository.RoomServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace HotelBookingSystem.Controllers
 {
@@ -25,7 +26,14 @@ namespace HotelBookingSystem.Controllers
         [HttpPost]
         public async Task<ActionResult<List<RoomDetails>>> PostRoomDetails(RoomDetails roomdetails)
         {
-            return await _context.PostRoomDetails(roomdetails);
+            try
+            {
+                return await _context.PostRoomDetails(roomdetails);
+            }
+            catch (ArithmeticException ex)
+            {
+                return NotFound(ex.Message);
+            }            
         }
 
 
@@ -38,7 +46,25 @@ namespace HotelBookingSystem.Controllers
         [HttpGet("Search Rooms in specific Hotel By the Hotel ID")]
         public async Task<ActionResult<List<RoomDetails>>> GetRoomDetailsByID(int id)
         {
-            return await _context.GetRoomDetailsByID(id);
+            try
+            {
+                return await _context.GetRoomDetailsByID(id);
+            }
+            catch (ArithmeticException ex)
+            {
+                return NotFound(ex.Message);
+            }
+
         }
+
+        [HttpGet("Available Rooms")]
+        public async Task<ActionResult<List<RoomDetails>>> FilterRoom()
+        {
+       
+           return await _context.FilterRoom();
+           
+        }
+
+
     }
 }

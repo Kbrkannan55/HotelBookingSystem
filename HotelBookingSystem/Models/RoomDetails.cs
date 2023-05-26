@@ -14,8 +14,7 @@ namespace HotelBookingSystem.Models
         [Required]
         public string? RoomStatus { get; set; }
         
-     /*   public double RoomPrice { get; set; }
-*/
+
         public ICollection<BookedDetails> BookedDetails { get; set; } = new List<BookedDetails>();
 
     }

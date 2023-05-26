@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelBookingSystem.Models;
 using HotelBookingSystem.Repository.CustomerServices;
+using System.Linq.Expressions;
 
 namespace HotelBookingSystem.Controllers
 {
@@ -24,7 +25,15 @@ namespace HotelBookingSystem.Controllers
         [HttpGet,Route("Get Your Details")]
         public async Task<ActionResult<Customer>> GetCustomers(int id)
         {
-            return await _context.GetCustomers(id);
+            try
+            {
+                return await _context.GetCustomers(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
          }
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)

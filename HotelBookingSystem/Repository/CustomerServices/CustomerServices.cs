@@ -14,7 +14,12 @@ namespace HotelBookingSystem.Repository.CustomerServices
 
         public async Task<Customer> GetCustomers(int id)
         {
+            
             var cus = await _context.Customers.FirstOrDefaultAsync(x => x.CusID == id);
+            if(id<0)
+            {
+                throw new ArithmeticException("Enter Valid Number");
+            }
             return cus;
         }
 
