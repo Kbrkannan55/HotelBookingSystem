@@ -40,8 +40,10 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         public async Task<RoomDetails> GetHotelDetails(int id)
         {
-            var Hotel=await _context.RoomDetails.FirstOrDefaultAsync(x=>x.HotelID==id);
+            var Hotel = await _context.RoomDetails.FirstOrDefaultAsync(x => x.HotelID == id);
             return Hotel;
+
+
         }
     }
 }

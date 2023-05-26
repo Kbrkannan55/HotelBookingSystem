@@ -26,10 +26,6 @@ namespace HotelBookingSystem.Repository.CustomerServices
 
         public async Task<Customer> PostCustomer(Customer customer)
         {
-            if (customer == null)
-            {
-                throw new Exception("Not Valid");
-            }
             _context.Customers.Add(customer);
             _context.SaveChanges();
             return customer;

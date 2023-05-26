@@ -65,6 +65,18 @@ namespace HotelBookingSystem.Controllers
            
         }
 
+        [HttpGet("Available Rooms Count")]
+        public async Task<ActionResult<object>> RoomsCount(int id)
+        {
+            try
+            {
+                return await _context.RoomsCount(id);
+            }
+            catch(ArithmeticException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
     }
 }

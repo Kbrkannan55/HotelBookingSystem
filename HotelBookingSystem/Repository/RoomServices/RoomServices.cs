@@ -1,5 +1,7 @@
 ﻿using HotelBookingSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace HotelBookingSystem.Repository.RoomServices
 {
@@ -44,6 +46,13 @@ namespace HotelBookingSystem.Repository.RoomServices
             return room.ToList();
         }
 
+
+        public async Task<object> RoomsCount(int id)
+        {
+            var count = _context.RoomDetails.Count(x => x.RoomID == id);
+            return count;
+        }
+        
 
     }
 }

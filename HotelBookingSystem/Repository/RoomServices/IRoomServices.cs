@@ -9,5 +9,6 @@ namespace HotelBookingSystem.Repository.RoomServices
         Task<List<RoomDetails>> GetRoomDetails();
         Task<List<RoomDetails>> GetRoomDetailsByID(int id);
         Task<List<RoomDetails>> FilterRoom();
+        Task<object> RoomsCount(int id);
     }
 }
