@@ -82,7 +82,7 @@ namespace HotelBookingSystem.Controllers
         [HttpDelete]
         public async Task<string> DeleteRooms(int id)
         {
-            return await _context.DeleteRooms();
+            return await _context.DeleteRooms(id);
         } 
 
     }
