@@ -52,7 +52,16 @@ namespace HotelBookingSystem.Repository.RoomServices
             var count = _context.RoomDetails.Count(x => x.RoomID == id);
             return count;
         }
-        
+
+        public async Task<string> DeleteRooms(int id)
+        {
+            var room=await _context.RoomDetails.FirstOrDefaultAsync(x=>x.RoomID==id);
+            _context.Remove(room);
+            _context.SaveChanges();
+            return "Room Deleted Successfully";
+        }
+
+
 
     }
 }

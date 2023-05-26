@@ -78,5 +78,12 @@ namespace HotelBookingSystem.Controllers
             }
         }
 
+        [Authorize]
+        [HttpDelete]
+        public async Task<string> DeleteRooms(int id)
+        {
+            return await _context.DeleteRooms();
+        } 
+
     }
 }

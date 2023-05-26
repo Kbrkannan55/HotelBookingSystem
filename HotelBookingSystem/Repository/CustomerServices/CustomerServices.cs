@@ -1,4 +1,5 @@
 ﻿using HotelBookingSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +45,7 @@ namespace HotelBookingSystem.Repository.CustomerServices
             return cus;
         }
 
+        [Authorize]
         public async Task<String> DeleteCustomer(int id)
         {
             if (id < 0)
