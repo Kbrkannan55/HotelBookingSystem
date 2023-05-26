@@ -1,6 +1,7 @@
 using HotelBookingSystem.Authorization;
 using HotelBookingSystem.Models;
 using HotelBookingSystem.Repository.CustomerServices;
+using HotelBookingSystem.Repository.HotelServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICustomerServices,CustomerServices>();
+builder.Services.AddScoped<IHotelServices,HotelServices>();
 builder.Services.AddDbContext<AuthorizationDBContext>(optionsAction: options => options.UseSqlServer(builder.Configuration.GetConnectionString(name: "HotelBookingSystem")));
 builder.Services.AddDbContext<HotelBookingDBContext>(optionsAction: options => options.UseSqlServer(builder.Configuration.GetConnectionString(name: "HotelBookingSystem")));
 var app = builder.Build();

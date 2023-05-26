@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HotelBookingSystem.Models;
+using HotelBookingSystem.Repository.HotelServices;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using Microsoft.VisualBasic;
 
 namespace HotelBookingSystem.Controllers
 {
@@ -13,14 +16,32 @@ namespace HotelBookingSystem.Controllers
     [ApiController]
     public class HotelDetailsController : ControllerBase
     {
-        private readonly HotelBookingDBContext _context;
+        private readonly IHotelServices _context;
 
-        public HotelDetailsController(HotelBookingDBContext context)
+        public HotelDetailsController(IHotelServices context)
         {
             _context = context;
         }
 
-        // GET: api/HotelDetails
+        [HttpGet("All Hotels Available")]
+        public async Task<ActionResult<List<HotelDetails>>> GetHotelDetails()
+        {
+            return await _context.GetHotelDetails();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<HotelDetails>>> PostHotelDetails(HotelDetails hotelDetails)
+        {
+            return await _context.PostHotelDetails(hotelDetails);
+        }
+
+        [HttpDelete]
+        public async Task<string> DeleteDetails(int id)
+        {
+            return await _context.DeleteDetails(id);
+        }
+
+       /* // GET: api/HotelDetails
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HotelDetails>>> GetHotelDetails()
         {
@@ -132,6 +153,6 @@ namespace HotelBookingSystem.Controllers
         private bool HotelDetailsExists(int id)
         {
             return (_context.HotelDetails?.Any(e => e.HotelID == id)).GetValueOrDefault();
-        }
+        }*/
     }
 }
