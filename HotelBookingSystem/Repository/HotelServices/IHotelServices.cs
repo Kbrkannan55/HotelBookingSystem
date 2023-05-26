@@ -10,5 +10,7 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         Task<string> DeleteDetails(int id);
 
+        Task<RoomDetails> GetHotelDetails(int id);
+
     }
 }

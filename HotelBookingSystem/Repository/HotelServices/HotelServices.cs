@@ -1,4 +1,5 @@
 ﻿using HotelBookingSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Contracts;
 
@@ -35,6 +36,12 @@ namespace HotelBookingSystem.Repository.HotelServices
 
          
 
+        }
+
+        public async Task<RoomDetails> GetHotelDetails(int id)
+        {
+            var Hotel=await _context.RoomDetails.FirstOrDefaultAsync(x=>x.HotelID==id);
+            return Hotel;
         }
     }
 }
