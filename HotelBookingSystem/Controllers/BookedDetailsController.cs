@@ -20,118 +20,36 @@ namespace HotelBookingSystem.Controllers
             _context = context;
         }
 
-        // GET: api/BookedDetails
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookedDetails>>> GetBookedDetails()
+        public async Task<ActionResult<List<BookedDetails>>> GetBookedDetails()
         {
-          if (_context.BookedDetails == null)
+          try 
           {
-              return NotFound();
-          }
-            return await _context.BookedDetails.ToListAsync();
+                return await _context.BookedDetails.ToListAsync();
+           }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         // GET: api/BookedDetails/5
         [HttpGet("{id}")]
         public async Task<ActionResult<BookedDetails>> GetBookedDetails(int id)
         {
-          if (_context.BookedDetails == null)
-          {
-              return NotFound();
-          }
-            var bookedDetails = await _context.BookedDetails.FindAsync(id);
-
-            if (bookedDetails == null)
-            {
-                return NotFound();
-            }
-
-            return bookedDetails;
-        }
-
-        // PUT: api/BookedDetails/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBookedDetails(int id, BookedDetails bookedDetails)
-        {
-            if (id != bookedDetails.BookingID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(bookedDetails).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                return await _context.GetBookedDetails(id);
             }
-            catch (DbUpdateConcurrencyException)
+            catch(Exception ex)
             {
-                if (!BookedDetailsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
 
-            return NoContent();
+      
         }
 
-        // POST: api/BookedDetails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<BookedDetails>> PostBookedDetails(BookedDetails bookedDetails)
-        {
-          if (_context.BookedDetails == null)
-          {
-              return Problem("Entity set 'HotelBookingDBContext.BookedDetails'  is null.");
-          }
-            _context.BookedDetails.Add(bookedDetails);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (BookedDetailsExists(bookedDetails.BookingID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetBookedDetails", new { id = bookedDetails.BookingID }, bookedDetails);
-        }
-
-        // DELETE: api/BookedDetails/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBookedDetails(int id)
-        {
-            if (_context.BookedDetails == null)
-            {
-                return NotFound();
-            }
-            var bookedDetails = await _context.BookedDetails.FindAsync(id);
-            if (bookedDetails == null)
-            {
-                return NotFound();
-            }
-
-            _context.BookedDetails.Remove(bookedDetails);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool BookedDetailsExists(int id)
-        {
-            return (_context.BookedDetails?.Any(e => e.BookingID == id)).GetValueOrDefault();
-        }
     }
 }
