@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Contracts;
+using System.Security.Cryptography.Xml;
 
 namespace HotelBookingSystem.Repository.HotelServices
 {
@@ -16,6 +17,7 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         public async Task<List<HotelDetails>> GetHotelDetails()
         {
+            
             var Hotels=await _context.HotelDetails.ToListAsync();
             return Hotels;
         }
@@ -30,6 +32,8 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         public async Task<string> DeleteDetails(int id)
         {
+            if (id == null)
+                throw new Exception("Not Valid");
             var Hotel= await _context.HotelDetails.FirstOrDefaultAsync(x=>x.HotelID==id);
             _context.Remove(Hotel);
             _context.SaveChanges();
@@ -41,6 +45,8 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         public async Task<RoomDetails> GetHotelDetails(int id)
         {
+            if (id < 0)
+                throw new Exception("Not Valid");
             var Hotel = await _context.RoomDetails.FirstOrDefaultAsync(x => x.HotelID == id);
             return Hotel;
 
