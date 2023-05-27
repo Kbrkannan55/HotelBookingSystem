@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBookingSystem.Migrations.AuthorizationDB
 {
     [DbContext(typeof(AuthorizationDBContext))]
-    [Migration("20230526055125_Auth")]
-    partial class Auth
+    [Migration("20230527160816_AuthDB")]
+    partial class AuthDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -13,6 +13,9 @@ namespace HotelBookingSystem.Models
         [Required]
         public string? HotelLocation { get; set; }
 
+        [Required]
+        public string? Amenities { get; set; }
+
         public ICollection<RoomDetails> RoomDetails { get; set; } = new List<RoomDetails>();
         public ICollection<BookedDetails> BookedDetails { get; set; } = new List<BookedDetails>();
     }

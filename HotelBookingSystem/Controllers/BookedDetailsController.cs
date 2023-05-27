@@ -27,14 +27,9 @@ namespace HotelBookingSystem.Controllers
         [HttpGet]
         public async Task<ActionResult<List<BookedDetails>>> GetBookedDetails()
         {
-          try 
-          {
+         
                 return await _context.GetBookedDetails();
-           }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        
             
         }
 

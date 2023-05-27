@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBookingSystem.Migrations.AuthorizationDB
 {
     /// <inheritdoc />
-    public partial class Auth : Migration
+    public partial class AuthDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

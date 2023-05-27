@@ -77,6 +77,10 @@ namespace HotelBookingSystem.Migrations
                     b.Property<int>("HotelID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Amenities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("HotelLocation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,6 +104,10 @@ namespace HotelBookingSystem.Migrations
 
                     b.Property<int>("HotelID")
                         .HasColumnType("int");
+
+                    b.Property<double?>("RoomPrice")
+                        .IsRequired()
+                        .HasColumnType("float");
 
                     b.Property<string>("RoomStatus")
                         .IsRequired()

@@ -74,5 +74,33 @@ namespace HotelBookingSystem.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [HttpGet("Search by Amenities")]
+        public async Task<ActionResult<List<HotelDetails>>> HotelDetailsByAmenities()
+        {
+            try
+            {
+                return await _context.HotelDetailsByAmenities();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("Total Hotels Count")]
+        public async Task<ActionResult<object>> HotelsCount()
+        {
+            try
+            {
+                return await _context.HotelsCount();
+
+               
+            }
+            catch(Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }

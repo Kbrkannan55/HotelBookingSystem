@@ -60,12 +60,18 @@ namespace HotelBookingSystem.Controllers
         [HttpGet("Available Rooms")]
         public async Task<ActionResult<List<RoomDetails>>> FilterRoom()
         {
-       
-           return await _context.FilterRoom();
-           
+            try
+            {
+
+                return await _context.FilterRoom();
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
-        [HttpGet("Available Rooms Count")]
+        [HttpGet("Available Rooms Count in Specific Hotel")]
         public async Task<ActionResult<object>> RoomsCount(int id)
         {
             try
@@ -77,12 +83,25 @@ namespace HotelBookingSystem.Controllers
                 return NotFound(ex.Message);
             }
         }
+        [HttpGet("Maximum Room Price")]
+        public async Task<ActionResult<object>> PriceDetails()
+        {
+            try
+            {
+                return await _context.PriceDetails();
+            }
+            catch(ArithmeticException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
 
         [Authorize]
         [HttpDelete]
         public async Task<string> DeleteRooms(int id)
         {
-            return await _context.DeleteRooms(id);
+                return await _context.DeleteRooms(id);
         } 
 
     }

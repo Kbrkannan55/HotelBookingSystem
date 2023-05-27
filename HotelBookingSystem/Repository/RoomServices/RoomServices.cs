@@ -42,6 +42,7 @@ namespace HotelBookingSystem.Repository.RoomServices
 
        public async Task<List<RoomDetails>> FilterRoom()
         {
+
             var room = _context.RoomDetails.Where(x => x.RoomStatus == "Available");
             return room.ToList();
         }
@@ -49,19 +50,29 @@ namespace HotelBookingSystem.Repository.RoomServices
 
         public async Task<object> RoomsCount(int id)
         {
-            var count = _context.RoomDetails.Count(x => x.RoomID == id);
+            if (id == null)
+                throw new Exception("Id is not Valid");
+            var count1 = _context.RoomDetails.Count(x => x.RoomStatus == "Available");
+            var count2 = _context.RoomDetails.Count(x => x.RoomStatus == "Booked");
+            var count = count1 + count2;
+
             return count;
+        }
+
+        public async Task<object> PriceDetails()
+        {
+            var MaxPrice = _context.RoomDetails.Max(x => x.RoomPrice);
+            return MaxPrice;
         }
 
         public async Task<string> DeleteRooms(int id)
         {
+            if (id == null)
+                throw new Exception("Id not Valid");
             var room=await _context.RoomDetails.FirstOrDefaultAsync(x=>x.RoomID==id);
             _context.Remove(room);
             _context.SaveChanges();
             return "Room Deleted Successfully";
         }
-
-
-
     }
 }

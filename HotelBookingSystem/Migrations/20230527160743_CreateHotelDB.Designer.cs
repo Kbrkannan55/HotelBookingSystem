@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBookingSystem.Migrations
 {
     [DbContext(typeof(HotelBookingDBContext))]
-    [Migration("20230526053305_HotelDB")]
-    partial class HotelDB
+    [Migration("20230527160743_CreateHotelDB")]
+    partial class CreateHotelDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,10 @@ namespace HotelBookingSystem.Migrations
                     b.Property<int>("HotelID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Amenities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("HotelLocation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,6 +107,10 @@ namespace HotelBookingSystem.Migrations
 
                     b.Property<int>("HotelID")
                         .HasColumnType("int");
+
+                    b.Property<double?>("RoomPrice")
+                        .IsRequired()
+                        .HasColumnType("float");
 
                     b.Property<string>("RoomStatus")
                         .IsRequired()

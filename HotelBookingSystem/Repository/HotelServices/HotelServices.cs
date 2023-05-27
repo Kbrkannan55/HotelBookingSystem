@@ -1,4 +1,5 @@
 ﻿using HotelBookingSystem.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Contracts;
@@ -44,6 +45,18 @@ namespace HotelBookingSystem.Repository.HotelServices
             return Hotel;
 
 
+        }
+
+        public async Task<List<HotelDetails>> HotelDetailsByAmenities()
+        {
+            var Hotel = await _context.HotelDetails.Where(x => x.Amenities == "Fully Furnished").ToListAsync();
+            return Hotel;
+        }
+
+        public async Task<object> HotelsCount()
+        {
+            var Hotel =  _context.HotelDetails.ToList().Count();
+            return Hotel;
         }
     }
 }

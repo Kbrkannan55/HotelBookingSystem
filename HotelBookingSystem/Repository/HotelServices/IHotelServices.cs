@@ -12,5 +12,8 @@ namespace HotelBookingSystem.Repository.HotelServices
 
         Task<RoomDetails> GetHotelDetails(int id);
 
+        Task<List<HotelDetails>> HotelDetailsByAmenities();
+
+        Task<object> HotelsCount();
     }
 }
